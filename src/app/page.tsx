@@ -1,3 +1,9 @@
+import { ProductList } from "@/components/ProductList";
+
 export default function Home() {
-  return <main className="h-full w-full bg-gray-background"></main>;
+  return (
+    <main>
+      <ProductList />
+    </main>
+  );
 }

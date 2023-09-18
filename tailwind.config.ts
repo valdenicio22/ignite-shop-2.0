@@ -18,14 +18,12 @@ const config: Config = {
         "gray-title": 'E1E1E6',
         "white": "FFFFFF"
       },
-      gradient: {
-        'img-gradient': 'linear-gradient(180deg, #1EA483 0%, #7465D4 100%)'
-      },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'gradient-bg': 'linear-gradient(180deg, #1EA483 0%, #7465D4 100%)',
       },
+      boxShadow:{
+        'card-shadow': '0px 0px 48px 0px rgba(0, 0, 0, 0.90);'
+      }
     },
   },
   plugins: [],
