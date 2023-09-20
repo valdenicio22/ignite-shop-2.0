@@ -12,7 +12,10 @@ export const ProductList = () => {
     },
   });
   return (
-    <div ref={sliderRef} className="flex items-center">
+    <div
+      ref={sliderRef}
+      className="w-full h-full max-w-[calc(100vw-(100vw-1180px)/2)] flex items-center ml-auto"
+    >
       {Array.from({ length: 6 }).map((_, i) => (
         <ProductCard key={i} className={`keen-slider__slide`} />
       ))}

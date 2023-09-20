@@ -9,7 +9,7 @@ const CartButton = forwardRef<HTMLButtonElement, CartButtonProps>(
       <button
         ref={ref}
         {...props}
-        className="p-3 bg-gray-elements ml-auto disabled:opacity-60 disabled:cursor-not-allowed"
+        className="p-3 bg-gray-elements ml-auto disabled:opacity-60 disabled:cursor-not-allowed rounded-lg"
       >
         <Handbag className="text-gray-icon " size={24} weight="bold" />
       </button>

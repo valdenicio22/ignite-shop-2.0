@@ -6,7 +6,7 @@ import { Cart } from "../Cart";
 
 export const Header = () => {
   return (
-    <header className="container flex items-center justify-center mt-10">
+    <header className="container flex items-center justify-center mt-10 mb-8">
       <Link href={"/"}>
         <Image
           src={"/assets/logo.svg"}

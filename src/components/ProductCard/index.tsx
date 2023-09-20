@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { CartButton } from "../CartButton";
 
 type ProductCardProps = {
   className: string;
@@ -18,8 +19,13 @@ export const ProductCard = ({ className }: ProductCardProps) => {
       />
 
       <footer className="absolute bottom-1 left-1 right-1 p-8 rounded-md flex items-center justify-between bg-gray-background/60 translate-y-[110%] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-        <span>Camiseta Beyond the Limits</span>
-        <span>R$ 79.90</span>
+        <div className="flex flex-col justify-start items-start">
+          <span className="text-lg font-bold text-gray-title">
+            Camiseta Beyond the Limits
+          </span>
+          <span className="text-2xl font-bold text-main-light">R$ 79.90</span>
+        </div>
+        <CartButton />
       </footer>
     </div>
   );
