@@ -1,6 +1,7 @@
 import { X } from "@phosphor-icons/react";
 import * as Dialog from "@radix-ui/react-dialog";
 import Image from "next/image";
+import { Button } from "../Button";
 import { CartButton } from "../CartButton";
 
 export const Cart = () => {
@@ -57,9 +58,7 @@ export const Cart = () => {
               <strong className="font-bold text-2xl">R$ 270,00</strong>
             </div>
           </div>
-          <button className={`w-full px-8 py-5 flex items-center justify-center bg-main text-white font-bold text-lg rounded-lg mt-14`}>
-            Finalizar compra
-          </button>
+          <Button className="mt-14">Finalizar compras</Button>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
