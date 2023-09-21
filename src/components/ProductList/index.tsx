@@ -1,10 +1,16 @@
 "use client";
 
+import { stripe } from "@/lib/stripe";
+import { Product } from "@/types/product";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { ProductCard } from "../ProductCard";
 
-export const ProductList = () => {
+type ProductListProps = {
+  products: Product[];
+};
+
+export const ProductList = ({ products }: ProductListProps) => {
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 2,
@@ -16,8 +22,12 @@ export const ProductList = () => {
       ref={sliderRef}
       className="w-full h-full max-w-[calc(100vw-(100vw-1180px)/2)] flex items-center ml-auto"
     >
-      {Array.from({ length: 6 }).map((_, i) => (
-        <ProductCard key={i} className={`keen-slider__slide`} />
+      {products.map((product, i) => (
+        <ProductCard
+          key={product.id}
+          className={`keen-slider__slide`}
+          product={product}
+        />
       ))}
     </div>
   );
