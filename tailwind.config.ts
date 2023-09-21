@@ -26,6 +26,9 @@ const config: Config = {
       },
       boxShadow:{
         'cart-shadow': '-4px 0px 30px 0px rgba(0, 0, 0, 0.80)'
+      },
+      gridTemplateColumns:{
+        product: '1fr 32rem'
       }
     },
   },
