@@ -23,16 +23,16 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
           className="object-cover bg-no-repeat"
         />
 
-        <footer className="absolute bottom-1 left-1 right-1 p-8 rounded-md flex items-center justify-between bg-gray-background/60 translate-y-[110%] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
+        <footer className="absolute bottom-1 left-1 right-1 p-6 rounded-md flex items-center justify-between bg-gray-background/60 translate-y-[110%] opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
           <div className="flex flex-col justify-start items-start">
-            <span className="text-lg font-bold text-gray-title">
+            <span className="text-xl font-bold text-gray-title">
               {product.name}
             </span>
             <span className="text-2xl font-bold text-main-light">
               {product.price && formatPrice(product.price)}
             </span>
           </div>
-          <CartButton />
+          <CartButton color="green" size="large" />
         </footer>
       </div>
     </Link>
