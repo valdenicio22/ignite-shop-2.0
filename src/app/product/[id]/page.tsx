@@ -1,22 +1,25 @@
 import { Button } from "@/components/Button";
+import { IProduct } from "@/context/useCart";
 import { stripe } from "@/lib/stripe";
-import { Product } from "@/types/product";
 import { formatPrice } from "@/utils/utils";
 import Image from "next/image";
 import Stripe from "stripe";
 
-async function getProductsData(productId: string): Promise<Product> {
+async function getProductsData(productId: string): Promise<IProduct> {
   const response = await stripe.products.retrieve(productId, {
     expand: ["default_price"],
   });
-  const productPrice = response.default_price as Stripe.Price;
+  const price = response.default_price as Stripe.Price;
+  const productPrice = price.unit_amount ? price.unit_amount / 100 : 0;
 
-  const product = {
+  const product: IProduct = {
     id: response.id,
     name: response.name,
     description: response.description ? response.description : "",
-    price: productPrice.unit_amount ? productPrice.unit_amount / 100 : 0,
+    price: formatPrice(productPrice),
+    numberPrice: productPrice,
     imageUrl: response.images[0],
+    defaultPriceId: price.id,
   };
   return product;
 }
@@ -46,7 +49,7 @@ export default async function Product(props: ProductProps) {
       <div className="w-full h-full flex flex-col justify-center items-start">
         <h2 className="text-2xl font-bold">{product.name}</h2>
         <strong className="text-2xl text-main-light mt-4">
-          {product.price && formatPrice(product.price)}
+          {product.price}
         </strong>
         <p className="mt-12 text-lg">{product.description}</p>
         <Button className="mt-auto">Colocar na sacola</Button>

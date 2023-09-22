@@ -1,6 +1,7 @@
 import { ProductList } from "@/components/ProductList";
+import { IProduct } from "@/context/useCart";
 import { stripe } from "@/lib/stripe";
-import { Product } from "@/types/product";
+import { formatPrice } from "@/utils/utils";
 import Stripe from "stripe";
 
 const getData = async () => {
@@ -13,7 +14,7 @@ const getData = async () => {
 export default async function Home() {
   const response = await getData();
 
-  const products: Product[] = response.data.map((product) => {
+  const products: IProduct[] = response.data.map((product) => {
     const price = product.default_price as Stripe.Price;
     const productPrice = price.unit_amount ? price.unit_amount / 100 : 0;
     return {
@@ -21,7 +22,9 @@ export default async function Home() {
       name: product.name,
       description: product?.description,
       imageUrl: product.images[0],
-      price: productPrice,
+      price: formatPrice(productPrice),
+      numberPrice: productPrice,
+      defaultPriceId: price.id,
     };
   });
   return (

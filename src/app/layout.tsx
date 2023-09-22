@@ -1,4 +1,5 @@
 import { Header } from "@/components/Header";
+import { CartContextProvider } from "@/context/useCart";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
@@ -18,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <Header />
-        {children}
+        <CartContextProvider>
+          <Header />
+          {children}
+        </CartContextProvider>
       </body>
     </html>
   );

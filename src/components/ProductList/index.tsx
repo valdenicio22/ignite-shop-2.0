@@ -1,13 +1,12 @@
 "use client";
 
-import { stripe } from "@/lib/stripe";
-import { Product } from "@/types/product";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { ProductCard } from "../ProductCard";
+import { IProduct } from "@/context/useCart";
 
 type ProductListProps = {
-  products: Product[];
+  products: IProduct[];
 };
 
 export const ProductList = ({ products }: ProductListProps) => {

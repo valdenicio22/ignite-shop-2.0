@@ -1,15 +1,25 @@
-import { Product } from "@/types/product";
+import { IProduct, useCart } from "@/context/useCart";
 import { formatPrice } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { MouseEvent } from "react";
 import { CartButton } from "../CartButton";
 
 type ProductCardProps = {
   className: string;
-  product: Product;
+  product: IProduct;
 };
 
 export const ProductCard = ({ className, product }: ProductCardProps) => {
+  const { addToCart } = useCart();
+  const handleAddToCart = (
+    event: MouseEvent<HTMLButtonElement>,
+    product: IProduct
+  ) => {
+    event.preventDefault();
+    addToCart(product);
+  };
+
   return (
     <Link href={`product/${product.id}`}>
       <div
@@ -29,10 +39,14 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
               {product.name}
             </span>
             <span className="text-2xl font-bold text-main-light">
-              {product.price && formatPrice(product.price)}
+              {product.price}
             </span>
           </div>
-          <CartButton color="green" size="large" />
+          <CartButton
+            color="green"
+            size="large"
+            onClick={(e) => handleAddToCart(e, product)}
+          />
         </footer>
       </div>
     </Link>
