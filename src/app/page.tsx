@@ -12,11 +12,10 @@ const getData = async () => {
 
 export default async function Home() {
   const response = await getData();
-  console.log("response", response);
 
   const products: Product[] = response.data.map((product) => {
     const price = product.default_price as Stripe.Price;
-    const productPrice = price.unit_amount ? price.unit_amount / 100 : 0
+    const productPrice = price.unit_amount ? price.unit_amount / 100 : 0;
     return {
       id: product.id,
       name: product.name,
