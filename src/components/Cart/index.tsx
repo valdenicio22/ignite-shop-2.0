@@ -58,7 +58,7 @@ export const Cart = () => {
             <div className="flex items-center justify-between">
               <p className="text-gray-title">Quantidade</p>
               <span className="text-lg">
-                {cartItems.length} {cartItems.length < 1 ? "item" : "items"}
+                {cartItems.length} {cartItems.length === 1 ? "item" : "itens"}
               </span>
             </div>
             <div className="flex items-center justify-between text-gray-title">

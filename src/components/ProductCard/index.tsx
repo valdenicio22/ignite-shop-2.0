@@ -1,5 +1,4 @@
 import { IProduct, useCart } from "@/context/useCart";
-import { formatPrice } from "@/utils/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { MouseEvent } from "react";
@@ -11,7 +10,7 @@ type ProductCardProps = {
 };
 
 export const ProductCard = ({ className, product }: ProductCardProps) => {
-  const { addToCart } = useCart();
+  const { addToCart, checkIfTheProductAlreadyExist } = useCart();
   const handleAddToCart = (
     event: MouseEvent<HTMLButtonElement>,
     product: IProduct
@@ -45,6 +44,7 @@ export const ProductCard = ({ className, product }: ProductCardProps) => {
           <CartButton
             color="green"
             size="large"
+            disabled={checkIfTheProductAlreadyExist(product.id)}
             onClick={(e) => handleAddToCart(e, product)}
           />
         </footer>

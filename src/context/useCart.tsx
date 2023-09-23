@@ -27,11 +27,10 @@ type CartContextProviderProps = {
 };
 export const CartContextProvider = ({ children }: CartContextProviderProps) => {
   const [cartItems, setCartItems] = useState<IProduct[]>([]);
-  console.log("cartItems", cartItems);
 
   const cartTotalPrice = useMemo(() => {
     return cartItems.length
-      ? cartItems.reduce((acc, product) => (acc += product.numberPrice), 0)
+      ? cartItems.reduce((acc, product) => acc + product.numberPrice, 0)
       : 0;
   }, [cartItems]);
 

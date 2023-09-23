@@ -1,9 +1,9 @@
 "use client";
 
+import { IProduct } from "@/context/useCart";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import { ProductCard } from "../ProductCard";
-import { IProduct } from "@/context/useCart";
 
 type ProductListProps = {
   products: IProduct[];
