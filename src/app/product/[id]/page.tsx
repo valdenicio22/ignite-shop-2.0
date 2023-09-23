@@ -5,38 +5,57 @@ import { IProduct, useCart } from "@/context/useCart";
 import { stripe } from "@/lib/stripe";
 import { formatPrice } from "@/utils/utils";
 import Image from "next/image";
-import { MouseEvent } from "react";
+import { MouseEvent, useCallback, useEffect, useState } from "react";
 import Stripe from "stripe";
 
-async function getProductsData(productId: string): Promise<IProduct> {
-  const response = await stripe.products.retrieve(productId, {
-    expand: ["default_price"],
-  });
-  const price = response.default_price as Stripe.Price;
-  const productPrice = price.unit_amount ? price.unit_amount / 100 : 0;
+// async function getProductsData(productId: string): Promise<IProduct> {
+//   const response = await stripe.products.retrieve(productId, {
+//     expand: ["default_price"],
+//   });
+//   const price = response.default_price as Stripe.Price;
+//   const productPrice = price.unit_amount ? price.unit_amount / 100 : 0;
 
-  const product: IProduct = {
-    id: response.id,
-    name: response.name,
-    description: response.description ? response.description : "",
-    price: formatPrice(productPrice),
-    numberPrice: productPrice,
-    imageUrl: response.images[0],
-    defaultPriceId: price.id,
-  };
-  return product;
-}
+//   const product: IProduct = {
+//     id: response.id,
+//     name: response.name,
+//     description: response.description ? response.description : "",
+//     price: formatPrice(productPrice),
+//     numberPrice: productPrice,
+//     imageUrl: response.images[0],
+//     defaultPriceId: price.id,
+//   };
+//   return product;
+// }
 
 type ProductProps = {
   params: {
     id: string;
   };
 };
-export default async function Product(props: ProductProps) {
+export default function Product(props: ProductProps) {
+  const [product, setProducts] = useState<IProduct>();
+  // console.log("props", props);
   const {
     params: { id },
   } = props;
-  const product = await getProductsData(id);
+
+  const getProducts = useCallback(async () => {
+    try {
+      const response = await fetch("/api/product", {
+        method: "POST",
+        body: JSON.stringify({ id }),
+      });
+      const data = await response.json();
+
+      setProducts(data.product);
+    } catch (err) {
+      alert("Falha ao acessar dados do produto!");
+    }
+  }, [id]);
+
+  useEffect(() => {
+    getProducts();
+  }, [getProducts]);
   const { addToCart, checkIfTheProductAlreadyExist } = useCart();
 
   const handleAddToCart = (
