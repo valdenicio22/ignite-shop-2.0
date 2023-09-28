@@ -34,10 +34,13 @@ type ProductProps = {
 };
 export default function Product(props: ProductProps) {
   const [product, setProducts] = useState<IProduct>();
+  const { addToCart, checkIfTheProductAlreadyExist } = useCart();
   // console.log("props", props);
   const {
     params: { id },
   } = props;
+  // const product = await getProductsData(id);
+  console.log("product", product);
 
   const getProducts = useCallback(async () => {
     try {
@@ -56,7 +59,6 @@ export default function Product(props: ProductProps) {
   useEffect(() => {
     getProducts();
   }, [getProducts]);
-  const { addToCart, checkIfTheProductAlreadyExist } = useCart();
 
   const handleAddToCart = (
     event: MouseEvent<HTMLButtonElement>,
