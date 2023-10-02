@@ -25,7 +25,8 @@ const config: Config = {
         'gradient-bg': 'linear-gradient(180deg, #1EA483 0%, #7465D4 100%)',
       },
       boxShadow:{
-        'cart-shadow': '-4px 0px 30px 0px rgba(0, 0, 0, 0.80)'
+        'cart-shadow': '-4px 0px 30px 0px rgba(0, 0, 0, 0.80)',
+        'images': '0px 0px 0px rgba(0,0,0,0.80)'
       },
       gridTemplateColumns:{
         product: '1fr 32rem'

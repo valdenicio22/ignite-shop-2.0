@@ -1,9 +1,10 @@
+import { useCart } from "@/context/useCart";
 import { Handbag } from "@phosphor-icons/react";
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { VariantProps, tv } from "tailwind-variants";
 
 const button = tv({
-  base: "p-3 ml-auto disabled:opacity-60 disabled:cursor-not-allowed rounded-lg",
+  base: "p-3 ml-auto disabled:opacity-60 disabled:cursor-not-allowed rounded-lg relative",
   variants: {
     color: {
       gray: "bg-gray-elements text-gray-icon",
@@ -25,6 +26,8 @@ type CartButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
 
 const CartButton = forwardRef<HTMLButtonElement, CartButtonProps>(
   ({ size, color, className, ...props }, ref) => {
+    const { cartItems } = useCart();
+    const cartLength = cartItems.length;
     return (
       <button
         ref={ref}
@@ -32,6 +35,11 @@ const CartButton = forwardRef<HTMLButtonElement, CartButtonProps>(
         {...props}
       >
         <Handbag weight="bold" />
+        {!!cartLength && (
+          <span className="flex items-center justify-center h-6 w-6 rounded-full bg-main border-[3px] border-gray-background text-white font-bold text-sm absolute -top-3 -right-2.5">
+            {cartLength}
+          </span>
+        )}
       </button>
     );
   }
