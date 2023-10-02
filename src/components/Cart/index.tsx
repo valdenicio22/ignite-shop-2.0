@@ -32,7 +32,7 @@ export const Cart = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger asChild>
-        <CartButton />
+        <CartButton cartQuantity={cartItems.length}/>
       </Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Content

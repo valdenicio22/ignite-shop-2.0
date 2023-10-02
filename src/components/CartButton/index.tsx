@@ -1,4 +1,3 @@
-import { useCart } from "@/context/useCart";
 import { Handbag } from "@phosphor-icons/react";
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { VariantProps, tv } from "tailwind-variants";
@@ -8,7 +7,7 @@ const button = tv({
   variants: {
     color: {
       gray: "bg-gray-elements text-gray-icon",
-      green: "bg-main text-white",
+      green: "bg-main-light text-white",
     },
     size: {
       regular: "text-2xl",
@@ -22,12 +21,12 @@ const button = tv({
 });
 
 type CartButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
-  VariantProps<typeof button>;
+  VariantProps<typeof button> & {
+    cartQuantity?: number;
+  };
 
 const CartButton = forwardRef<HTMLButtonElement, CartButtonProps>(
-  ({ size, color, className, ...props }, ref) => {
-    const { cartItems } = useCart();
-    const cartLength = cartItems.length;
+  ({ cartQuantity = 0, size, color, className, ...props }, ref) => {
     return (
       <button
         ref={ref}
@@ -35,9 +34,9 @@ const CartButton = forwardRef<HTMLButtonElement, CartButtonProps>(
         {...props}
       >
         <Handbag weight="bold" />
-        {!!cartLength && (
-          <span className="flex items-center justify-center h-6 w-6 rounded-full bg-main border-[3px] border-gray-background text-white font-bold text-sm absolute -top-3 -right-2.5">
-            {cartLength}
+        {!!cartQuantity && (
+          <span className="flex items-center justify-center w-[28px] h-[28px] rounded-full bg-main border-[3px] border-gray-background text-white font-bold text-sm absolute -top-3 -right-2.5">
+            {cartQuantity}
           </span>
         )}
       </button>
